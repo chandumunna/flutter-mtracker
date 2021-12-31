@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mtracker/edit_transaction.dart';
 
 import 'constant.dart';
 import 'model/transaction.dart';
@@ -41,6 +42,16 @@ class AllTransaction extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.grey.shade200,
                         child: InkWell(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditTransaction(
+                                  transactionModel: transactionModel,
+                                ),
+                              ),
+                            );
+                          },
                           onLongPress: () {
                             showDialog(
                               context: context,

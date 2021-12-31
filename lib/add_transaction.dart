@@ -5,21 +5,21 @@ import 'constant.dart';
 import 'model/transaction.dart';
 import 'services/database_manager.dart';
 
-class AddEditTransaction extends StatefulWidget {
+class AddTransaction extends StatefulWidget {
   final String transactionType;
   final List<String> chips;
 
-  const AddEditTransaction({
+  const AddTransaction({
     Key? key,
     required this.transactionType,
     required this.chips,
   }) : super(key: key);
 
   @override
-  State<AddEditTransaction> createState() => _AddEditTransactionState();
+  State<AddTransaction> createState() => _AddTransactionState();
 }
 
-class _AddEditTransactionState extends State<AddEditTransaction> {
+class _AddTransactionState extends State<AddTransaction> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final TextEditingController _atmCtrl = TextEditingController();
   final TextEditingController _noteCtrl = TextEditingController();

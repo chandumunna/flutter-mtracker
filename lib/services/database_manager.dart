@@ -36,10 +36,21 @@ class DatabaseManager {
           );
 
   static Future<List<String>> getAllNotesOfType(String type) => _db
-      .collection(TRANSACTION_COLLECTION_NAME)
-      .where('type', isEqualTo: type)
-      .get()
-      .then(
-        (value) => value.docs.map((e) => e['note'] as String).toSet().toList(),
+          .collection(TRANSACTION_COLLECTION_NAME)
+          .where('type', isEqualTo: type)
+          .get()
+          .then(
+        (value) {
+          final List<String> trans =
+              value.docs.map((e) => TransactionModel.fromDoc(e).note).toList();
+          final occurrence = <String, int>{};
+          for (final t in trans) {
+            occurrence[t] = occurrence.containsKey(t) ? occurrence[t]! + 1 : 1;
+          }
+
+          final output = occurrence.keys.toList(growable: false);
+          output.sort((k1, k2) => occurrence[k2]!.compareTo(occurrence[k1]!));
+          return output.take(10).toList();
+        },
       );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mtracker/services/database_manager.dart';
 
-import '../add_edit_transaction.dart';
+import '../add_transaction.dart';
 import '../constant.dart';
 
 class TransactionButtonsWidget extends StatelessWidget {
@@ -16,12 +16,16 @@ class TransactionButtonsWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () async {
-            // TODO : Incoming transaction form....
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  const Center(child: CircularProgressIndicator()),
+            );
             DatabaseManager.getAllNotesOfType('Incoming').then(
-              (value) => Navigator.push(
+              (value) => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddEditTransaction(
+                  builder: (context) => AddTransaction(
                     transactionType: 'Incoming',
                     chips: value,
                   ),
@@ -47,12 +51,16 @@ class TransactionButtonsWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            // TODO : Outgoing transaction form....
+            showDialog(
+              context: context,
+              builder: (context) =>
+                  const Center(child: CircularProgressIndicator()),
+            );
             DatabaseManager.getAllNotesOfType('Outgoing').then(
-              (value) => Navigator.push(
+              (value) => Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddEditTransaction(
+                  builder: (context) => AddTransaction(
                     transactionType: 'Outgoing',
                     chips: value,
                   ),
