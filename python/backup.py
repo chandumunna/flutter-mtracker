@@ -7,13 +7,11 @@ firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 COLLECTION_NAME = 'Transaction'
-df = pd.DataFrame()
+BACKUP_COLLECTION_NAME = 'Transaction_A'
 
 source = db.collection(COLLECTION_NAME)
 for doc in source.stream():
     print("Reading :::", doc.id)
-    df = df.append(doc.to_dict(), ignore_index=True)
-
-csv_file=r"csv\Transaction.csv"
-print("Generating CSV under",csv_file)
-df.to_csv(csv_file, index=False)
+    data = doc.to_dict()
+    data['pin'] = False
+    db.collection(BACKUP_COLLECTION_NAME).document(doc.id).set(data)
