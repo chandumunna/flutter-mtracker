@@ -10,6 +10,7 @@ class DatabaseManager {
 
   static Stream<QuerySnapshot> getAllTransaction() => _db
       .collection(TRANSACTION_COLLECTION_NAME)
+      .orderBy('pin', descending: true)
       .orderBy('timestamp', descending: true)
       .snapshots();
 

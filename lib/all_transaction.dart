@@ -28,26 +28,15 @@ class AllTransaction extends StatelessWidget {
               if (snapshot.hasData) {
                 final List<DocumentSnapshot<Object?>> allTransactions =
                     snapshot.data!.docs;
-                final List<TransactionModel> allTransactionModels =
-                    allTransactions
-                        .map((e) => TransactionModel.fromDoc(e))
-                        .toList();
 
-                final List<TransactionModel> pinedList = allTransactionModels
-                    .where((element) => element.pin)
-                    .toList();
-                final List<TransactionModel> unPinedList = allTransactionModels
-                    .where((element) => !element.pin)
-                    .toList();
-                final finalList = pinedList + unPinedList;
-                if (finalList.isEmpty) {
+                if (allTransactions.isEmpty) {
                   return const ErrorDetailWidget('No Transaction Found');
                 }
                 return ListView.builder(
-                  itemCount: finalList.length,
+                  itemCount: allTransactions.length,
                   itemBuilder: (context, index) {
                     final TransactionModel transactionModel =
-                        finalList[index];
+                        TransactionModel.fromDoc(allTransactions[index]);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Material(
