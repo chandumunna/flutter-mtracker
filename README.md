@@ -9,6 +9,4 @@
 
 # Screen Shots
 
-<img src="images\₹Tracker-home.jpg" width="128"/>
-<img src="images\₹Tracker-all_transaction.jpg" width="128"/>
-<img src="images\₹Tracker-add_transaction.jpg" width="128"/>
+<img src="images\₹Tracker-home.jpg" width="128"/> <img src="images\₹Tracker-all_transaction.jpg" width="128"/> <img src="images\₹Tracker-add_transaction.jpg" width="128"/>
