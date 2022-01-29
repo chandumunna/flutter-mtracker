@@ -122,6 +122,7 @@ class _EditTransactionState extends State<EditTransaction> {
                               timestamp: widget.transactionModel.timestamp,
                               date: widget.transactionModel.date,
                               description: _descriptionCtrl.text.trim(),
+                              pin: widget.transactionModel.pin,
                             );
                             DatabaseManager.addTransaction(model)
                                 .then((value) => Navigator.pop(context));

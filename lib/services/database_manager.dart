@@ -6,7 +6,7 @@ import '../model/transaction.dart';
 class DatabaseManager {
   String version = '1.0';
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
-  static const String TRANSACTION_COLLECTION_NAME = 'Transaction';
+  static const String TRANSACTION_COLLECTION_NAME = 'Transaction_A';
 
   static Stream<QuerySnapshot> getAllTransaction() => _db
       .collection(TRANSACTION_COLLECTION_NAME)
@@ -34,6 +34,13 @@ class DatabaseManager {
             (value) =>
                 value.docs.map((e) => e['note'] as String).toSet().toList(),
           );
+  static Future<void> togglePin(TransactionModel model) {
+    model.pin = !model.pin;
+    return _db
+        .collection(TRANSACTION_COLLECTION_NAME)
+        .doc(model.id)
+        .set(model.toJson());
+  }
 
   static Future<List<String>> getAllNotesOfType(String type) => _db
           .collection(TRANSACTION_COLLECTION_NAME)

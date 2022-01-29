@@ -137,6 +137,7 @@ class _AddTransactionState extends State<AddTransaction> {
                               timestamp: time,
                               date: formatDate(time.toDate()),
                               description: _descriptionCtrl.text.trim(),
+                              pin: false,
                             );
                             DatabaseManager.addTransaction(model)
                                 .then((value) => Navigator.pop(context));
