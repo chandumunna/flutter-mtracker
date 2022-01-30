@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mtracker/all_transaction.dart';
+import 'package:mtracker/constant.dart';
 
 import 'model/transaction.dart';
 import 'services/database_manager.dart';
@@ -35,6 +37,50 @@ class _EditTransactionState extends State<EditTransaction> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Delete confirmation'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Are sure want to delete this transaction',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  Text(
+                    '${widget.transactionModel.note} at ${widget.transactionModel.date} : \n ${formatAtm(widget.transactionModel.amount)}',
+                  )
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    DatabaseManager.deleteTransaction(
+                      widget.transactionModel,
+                    ).then((value) => Navigator.pop(context));
+                  },
+                  child: const Text(
+                    "Delete",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            ),
+          ).then(
+            (value) => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AllTransaction(),
+              ),
+            ),
+          );
+        },
+        child: const Icon(Icons.delete),
+      ),
       appBar: AppBar(
         title: const Text('Add Transaction'),
       ),

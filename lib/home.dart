@@ -13,10 +13,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 1), () {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 1),
           behavior: SnackBarBehavior.floating,
-          content: Text(
+          margin: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.2,
+            vertical: 20,
+          ),
+          content: const Text(
             'Fetched data from ${DatabaseManager.TRANSACTION_COLLECTION_NAME}',
+            textAlign: TextAlign.center,
           ),
         ),
       );
