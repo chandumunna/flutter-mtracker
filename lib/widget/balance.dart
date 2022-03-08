@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../model/transaction.dart';
 import '../../services/database_manager.dart';
@@ -58,12 +59,27 @@ class BalanceWidget extends StatelessWidget {
                         totalSum += model.amount;
                       }
 
-                      return Text(
-                        '${formatAtm(totalSum)}/-',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4!
-                            .copyWith(color: Colors.black),
+                      return GestureDetector(
+                        onLongPress: () {
+                          Clipboard.setData(
+                            ClipboardData(text: totalSum.toStringAsFixed(2)),
+                          ).then((_) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "${totalSum.toStringAsFixed(2)} copied to clipboard",
+                                ),
+                              ),
+                            );
+                          });
+                        },
+                        child: Text(
+                          '${formatAtm(totalSum)}/-',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(color: Colors.black),
+                        ),
                       );
                     } else {
                       return const Center(

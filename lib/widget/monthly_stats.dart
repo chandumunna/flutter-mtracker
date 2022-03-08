@@ -129,7 +129,7 @@ class MonthlyStatsWidget extends StatelessWidget {
     items.forEach((key, value) {
       itemList.add({'key': key, 'value': value});
     });
-    itemList.sort((a, b) => (a['value'] as int).compareTo(b['value'] as int));
+    itemList.sort((a, b) => (a['value'] as int).compareTo(b['value'] as num));
     return itemList;
   }
 
