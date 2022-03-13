@@ -59,6 +59,7 @@ class _AddTransactionState extends State<AddTransaction> {
                         } catch (e) {
                           return 'Please enter valid amount';
                         }
+                        return null;
                       },
                     ),
                     const Divider(),
@@ -78,6 +79,7 @@ class _AddTransactionState extends State<AddTransaction> {
                         if (value.length > 10) {
                           return 'Transaction note should ne less than 10 words';
                         }
+                        return null;
                       },
                     ),
                     const Divider(),
@@ -94,6 +96,7 @@ class _AddTransactionState extends State<AddTransaction> {
                         if (value!.isEmpty) {
                           return 'Please enter transaction description';
                         }
+                        return null;
                       },
                     ),
                     const Divider(),
