@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../model/transaction.dart';
+import 'package:mtracker/model/transaction.dart';
 
 class DatabaseManager {
   String version = '1.0';

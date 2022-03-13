@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mtracker/all_transaction.dart';
 import 'package:mtracker/constant.dart';
-
-import 'model/transaction.dart';
-import 'services/database_manager.dart';
+import 'package:mtracker/model/transaction.dart';
+import 'package:mtracker/services/database_manager.dart';
 
 class EditTransaction extends StatefulWidget {
   final TransactionModel transactionModel;

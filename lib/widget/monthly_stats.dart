@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../../model/transaction.dart';
-import '../../services/database_manager.dart';
-import '../../widget/loading.dart';
-import '../constant.dart';
+import 'package:mtracker/constant.dart';
+import 'package:mtracker/model/transaction.dart';
+import 'package:mtracker/services/database_manager.dart';
+import 'package:mtracker/widget/loading.dart';
 
 class MonthlyStatsWidget extends StatelessWidget {
   const MonthlyStatsWidget({Key? key}) : super(key: key);
@@ -129,7 +128,7 @@ class MonthlyStatsWidget extends StatelessWidget {
     items.forEach((key, value) {
       itemList.add({'key': key, 'value': value});
     });
-    itemList.sort((a, b) => (a['value'] as int).compareTo(b['value'] as num));
+    itemList.sort((a, b) => (a['value'] as num).compareTo(b['value'] as num));
     return itemList;
   }
 

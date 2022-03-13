@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mtracker/services/database_manager.dart';
+import 'package:mtracker/widget/balance.dart';
 import 'package:mtracker/widget/monthly_stats.dart';
-
-import 'widget/balance.dart';
-import 'widget/transaction_buttons.dart';
-import 'widget/welcome.dart';
+import 'package:mtracker/widget/transaction_buttons.dart';
+import 'package:mtracker/widget/welcome.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

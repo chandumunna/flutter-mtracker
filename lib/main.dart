@@ -1,10 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'home.dart';
-import 'widget/error.dart';
-import 'widget/loading.dart';
+import 'package:mtracker/home.dart';
+import 'package:mtracker/widget/error.dart';
+import 'package:mtracker/widget/loading.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

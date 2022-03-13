@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../constant.dart';
+import 'package:mtracker/constant.dart';
 
 class WelcomeWidget extends StatelessWidget {
   const WelcomeWidget({
