@@ -93,37 +93,51 @@ class _EditTransactionState extends State<EditTransaction> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    TextFormField(
-                      controller: _atmCtrl,
-                      decoration: const InputDecoration(
-                        hintText: 'Amount',
-                        border: InputBorder.none,
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      child: TextFormField(
+                        controller: _atmCtrl,
+                        autofocus: true,
+                        style: Theme.of(context).textTheme.headline3,
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          hintText: 'Amount',
+                          hintStyle: Theme.of(context).textTheme.headline3,
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          filled: true,
+                          contentPadding: const EdgeInsets.all(16),
+                          fillColor: Colors.grey.shade200,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter transaction amount';
+                          }
+                          try {
+                            num.parse(value);
+                          } catch (e) {
+                            return 'Please enter valid amount';
+                          }
+                          return null;
+                        },
                       ),
-                      autofocus: true,
-                      style: Theme.of(context).textTheme.headline5,
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter transaction amount';
-                        }
-                        try {
-                          num.parse(value);
-                        } catch (e) {
-                          return 'Please enter valid amount';
-                        }
-                        return null;
-                      },
                     ),
                     const Divider(),
                     TextFormField(
                       controller: _noteCtrl,
-                      decoration: const InputDecoration(
-                        hintText: 'Note',
-                        border: InputBorder.none,
-                      ),
                       style: Theme.of(context).textTheme.headline6,
                       keyboardType: TextInputType.text,
                       textCapitalization: TextCapitalization.words,
+                      textInputAction: TextInputAction.next,
+                      decoration: const InputDecoration(
+                        hintText: 'Note',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                      ),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter transaction note';
@@ -137,13 +151,17 @@ class _EditTransactionState extends State<EditTransaction> {
                     const Divider(),
                     TextFormField(
                       controller: _descriptionCtrl,
+                      style: Theme.of(context).textTheme.headline6,
+                      keyboardType: TextInputType.multiline,
+                      textCapitalization: TextCapitalization.sentences,
+                      textInputAction: TextInputAction.newline,
+                      maxLines: null,
                       decoration: const InputDecoration(
                         hintText: 'description',
-                        border: InputBorder.none,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
                       ),
-                      style: Theme.of(context).textTheme.headline6,
-                      keyboardType: TextInputType.text,
-                      textCapitalization: TextCapitalization.sentences,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Please enter transaction description';
