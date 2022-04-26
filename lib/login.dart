@@ -22,12 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
               width: MediaQuery.of(context).size.width * 0.7,
               child: TextFormField(
                 controller: _passCtrl,
-                autofocus: true,
                 style: Theme.of(context).textTheme.headline3,
-                keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,
-                textInputAction: TextInputAction.next,
                 showCursor: false,
+                enabled: false,
                 decoration: InputDecoration(
                   hintText: 'Passcode',
                   hintStyle: Theme.of(context).textTheme.headline3,
@@ -38,17 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   contentPadding: const EdgeInsets.all(16),
                   fillColor: Colors.grey.shade200,
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter transaction amount';
-                  }
-                  try {
-                    num.parse(value);
-                  } catch (e) {
-                    return 'Please enter valid amount';
-                  }
-                  return null;
-                },
               ),
             ),
             const SizedBox(height: 25),
