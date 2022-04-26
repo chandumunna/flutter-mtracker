@@ -18,7 +18,17 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp(
+    options: FirebaseOptions.fromMap(const {
+      "apiKey": "AIzaSyBOq8HJFYR8hoPcLIuxTPVEGKet3Y5LYBE",
+      "authDomain": "mtracker-sanjay-rb.firebaseapp.com",
+      "projectId": "mtracker-sanjay-rb",
+      "storageBucket": "mtracker-sanjay-rb.appspot.com",
+      "messagingSenderId": "169102308036",
+      "appId": "1:169102308036:web:bd3615ea97dfce9e954f91",
+      "measurementId": "G-PZZQPYWW22"
+    }),
+  );
 
   @override
   Widget build(BuildContext context) {
