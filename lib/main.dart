@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mtracker/home.dart';
+import 'package:mtracker/login.dart';
 import 'package:mtracker/widget/error.dart';
 import 'package:mtracker/widget/loading.dart';
 
@@ -47,7 +47,7 @@ class _AppState extends State<App> {
             } else {
               return snapshot.hasError
                   ? const ErrorDetailWidget("Firebase Not Connected")
-                  : const HomeScreen();
+                  : const LoginScreen();
             }
           },
         ),
