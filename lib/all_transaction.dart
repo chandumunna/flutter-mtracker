@@ -9,6 +9,7 @@ import 'package:mtracker/widget/error.dart';
 import 'package:mtracker/widget/loading.dart';
 
 class AllTransaction extends StatelessWidget {
+  static const route = '/transactions';
   const AllTransaction({Key? key}) : super(key: key);
 
   @override
@@ -72,13 +73,10 @@ class _TransactionLIstWidgetState extends State<TransactionListWidget> {
             color: Colors.grey.shade200,
             child: InkWell(
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => EditTransaction(
-                      transactionModel: transactionModel,
-                    ),
-                  ),
+                  EditTransaction.route,
+                  arguments: transactionModel,
                 );
               },
               onLongPress: () {

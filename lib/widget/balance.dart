@@ -15,13 +15,7 @@ class BalanceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO : Need to add all transaction list....
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const AllTransaction(),
-          ),
-        );
+        Navigator.pushNamed(context, AllTransaction.route);
       },
       child: Material(
         borderRadius: BorderRadius.circular(25.0),

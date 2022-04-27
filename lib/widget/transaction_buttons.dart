@@ -21,14 +21,10 @@ class TransactionButtonsWidget extends StatelessWidget {
                   const Center(child: CircularProgressIndicator()),
             );
             DatabaseManager.getAllNotesOfType('Incoming').then(
-              (value) => Navigator.pushReplacement(
+              (value) => Navigator.pushReplacementNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => AddTransaction(
-                    transactionType: 'Incoming',
-                    chips: value,
-                  ),
-                ),
+                AddTransaction.route,
+                arguments: {"value": value, "transactionType": "Incoming"},
               ),
             );
           },
@@ -56,14 +52,10 @@ class TransactionButtonsWidget extends StatelessWidget {
                   const Center(child: CircularProgressIndicator()),
             );
             DatabaseManager.getAllNotesOfType('Outgoing').then(
-              (value) => Navigator.pushReplacement(
+              (value) => Navigator.pushReplacementNamed(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => AddTransaction(
-                    transactionType: 'Outgoing',
-                    chips: value,
-                  ),
-                ),
+                AddTransaction.route,
+                arguments: {"value": value, "transactionType": "Outgoing"},
               ),
             );
           },

@@ -6,6 +6,7 @@ import 'package:mtracker/widget/transaction_buttons.dart';
 import 'package:mtracker/widget/welcome.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const route = '/home';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

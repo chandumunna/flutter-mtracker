@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mtracker/all_transaction.dart';
 import 'package:mtracker/constant.dart';
 import 'package:mtracker/model/transaction.dart';
 import 'package:mtracker/services/database_manager.dart';
 
 class EditTransaction extends StatefulWidget {
   final TransactionModel transactionModel;
-
+  static const route = '/edit';
   const EditTransaction({
     Key? key,
     required this.transactionModel,
@@ -70,12 +69,7 @@ class _EditTransactionState extends State<EditTransaction> {
               ],
             ),
           ).then(
-            (value) => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AllTransaction(),
-              ),
-            ),
+            (value) => Navigator.pop(context),
           );
         },
         child: const Icon(Icons.delete),

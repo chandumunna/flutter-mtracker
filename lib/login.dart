@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mtracker/home.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const route = '/login';
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -150,12 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onLongPress: () {
                     passcode += "0";
                     if (passcode == "4720") {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
-                        ),
-                      );
+                      Navigator.pushReplacementNamed(context, HomeScreen.route);
                     }
                   },
                   child: ClipOval(

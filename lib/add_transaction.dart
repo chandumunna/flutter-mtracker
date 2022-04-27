@@ -5,6 +5,7 @@ import 'package:mtracker/model/transaction.dart';
 import 'package:mtracker/services/database_manager.dart';
 
 class AddTransaction extends StatefulWidget {
+  static const route = '/add';
   final String transactionType;
   final List<String> chips;
 
