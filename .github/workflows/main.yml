@@ -38,5 +38,10 @@ jobs:
           cd M-Tracker
           rm -rf *
           ls
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      # Flutter actions
+      - name: Flutter action
+        uses: subosito/flutter-action@v2.4.0
+      - run: |
+          flutter --version 
+          ls
+      
