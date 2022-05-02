@@ -34,7 +34,7 @@ jobs:
         run: |
           git --version
           rm -rf M-Tracker
-          git clone https://github.com/sanjay-rb/M-Tracker.git
+          git clone https://sanjay-rb:${{ secrets.GIT_TOKEN }}@github.com/sanjay-rb/M-Tracker.git
           cd M-Tracker
           rm -rf *
       # Flutter actions
