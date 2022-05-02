@@ -97,7 +97,9 @@ class _EditTransactionState extends State<EditTransaction> {
                         controller: _atmCtrl,
                         autofocus: true,
                         style: Theme.of(context).textTheme.headline3,
-                        keyboardType: TextInputType.number,
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         textAlign: TextAlign.center,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
