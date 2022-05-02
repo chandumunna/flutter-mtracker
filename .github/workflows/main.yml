@@ -43,5 +43,14 @@ jobs:
         uses: subosito/flutter-action@v2.4.0
       - run: |
           flutter --version 
-          ls
+          flutter pub get
+          flutter build web --release
+          cp -R build/web M-Tracker/
       
+      - name: Git Push for M-Tracker
+        run: |
+          cd M-Tracker
+          git status
+          git add --all
+          git commit -m "New change from mtracker"
+          git push
