@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mtracker/constant.dart';
 import 'package:mtracker/model/transaction.dart';
 import 'package:mtracker/services/database_manager.dart';
@@ -20,6 +23,7 @@ class _EditTransactionState extends State<EditTransaction> {
   final TextEditingController _atmCtrl = TextEditingController();
   final TextEditingController _noteCtrl = TextEditingController();
   final TextEditingController _descriptionCtrl = TextEditingController();
+  DateTime dateTime = DateTime.now();
 
   @override
   void initState() {
@@ -165,6 +169,48 @@ class _EditTransactionState extends State<EditTransaction> {
                     ),
                     const Divider(),
                     const SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                    DateTimeField(
+                      initialValue: widget.transactionModel.timestamp.toDate(),
+                      format: DateFormat("dd-MM-yyyy hh:mm aaa"),
+                      decoration: const InputDecoration(
+                        hintText: 'Date Time',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please give date and time";
+                        }
+                        return null;
+                      },
+                      onChanged: (val) {
+                        dateTime = val!;
+                      },
+                      onShowPicker: (context, currentValue) async {
+                        final date = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime.now()
+                              .subtract(const Duration(days: 365 * 3)),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate:
+                              DateTime.now().add(const Duration(days: 365 * 3)),
+                        );
+                        if (date != null) {
+                          final time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.fromDateTime(
+                              currentValue ?? DateTime.now(),
+                            ),
+                          );
+                          return DateTimeField.combine(date, time);
+                        } else {
+                          return currentValue;
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: 80,
@@ -179,8 +225,8 @@ class _EditTransactionState extends State<EditTransaction> {
                                   ? num.parse(_atmCtrl.text) * -1
                                   : num.parse(_atmCtrl.text),
                               type: widget.transactionModel.type,
-                              timestamp: widget.transactionModel.timestamp,
-                              date: widget.transactionModel.date,
+                              timestamp: Timestamp.fromDate(dateTime),
+                              date: formatDate(dateTime),
                               description: _descriptionCtrl.text.trim(),
                               pin: widget.transactionModel.pin,
                             );

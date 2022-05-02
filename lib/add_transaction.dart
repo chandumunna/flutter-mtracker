@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mtracker/constant.dart';
 import 'package:mtracker/model/transaction.dart';
 import 'package:mtracker/services/database_manager.dart';
@@ -24,7 +26,7 @@ class _AddTransactionState extends State<AddTransaction> {
   final TextEditingController _atmCtrl = TextEditingController();
   final TextEditingController _noteCtrl = TextEditingController();
   final TextEditingController _descriptionCtrl = TextEditingController();
-
+  DateTime dateTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,6 +140,47 @@ class _AddTransactionState extends State<AddTransaction> {
                       ),
                     ),
                     const SizedBox(height: 10),
+                    DateTimeField(
+                      format: DateFormat("dd-MM-yyyy hh:mm aaa"),
+                      initialValue: dateTime,
+                      decoration: const InputDecoration(
+                        hintText: 'Date Time',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null) {
+                          return "Please give date and time";
+                        }
+                        return null;
+                      },
+                      onChanged: (val) {
+                        dateTime = val!;
+                      },
+                      onShowPicker: (context, currentValue) async {
+                        final date = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime.now()
+                              .subtract(const Duration(days: 365 * 3)),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate:
+                              DateTime.now().add(const Duration(days: 365 * 3)),
+                        );
+                        if (date != null) {
+                          final time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.fromDateTime(
+                              currentValue ?? DateTime.now(),
+                            ),
+                          );
+                          return DateTimeField.combine(date, time);
+                        } else {
+                          return currentValue;
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: 80,
@@ -147,7 +190,7 @@ class _AddTransactionState extends State<AddTransaction> {
                             FocusScope.of(context).unfocus();
                             final String id =
                                 '${DateTime.now().microsecondsSinceEpoch}';
-                            final time = Timestamp.now();
+                            // final time = Timestamp.now();
                             final TransactionModel model = TransactionModel(
                               id: id,
                               note: _noteCtrl.text.trim(),
@@ -155,8 +198,8 @@ class _AddTransactionState extends State<AddTransaction> {
                                   ? num.parse(_atmCtrl.text) * -1
                                   : num.parse(_atmCtrl.text),
                               type: widget.transactionType,
-                              timestamp: time,
-                              date: formatDate(time.toDate()),
+                              timestamp: Timestamp.fromDate(dateTime),
+                              date: formatDate(dateTime),
                               description: _descriptionCtrl.text.trim(),
                               pin: false,
                             );
