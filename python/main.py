@@ -6,7 +6,7 @@ cred = credentials.Certificate(r"firebase-admin-key.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
-COLLECTION_NAME = 'Transaction'
+COLLECTION_NAME = 'Transaction_A'
 df = pd.DataFrame()
 
 source = db.collection(COLLECTION_NAME)

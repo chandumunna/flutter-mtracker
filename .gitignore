@@ -1,6 +1,8 @@
 # My Ignore
 *google-services.json*
 python/firebase-admin-key.json
+python/venv/
+python/venv/Lib/site-packages/
 
 # Miscellaneous
 *.class
