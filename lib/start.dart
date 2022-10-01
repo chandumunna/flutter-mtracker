@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mtracker/home.dart';
 import 'package:mtracker/login.dart';
 import 'package:mtracker/widget/loading.dart';
 
@@ -24,7 +25,7 @@ class _StartScreenState extends State<StartScreen> {
         "measurementId": "G-PZZQPYWW22"
       }),
     ).then((value) {
-      Navigator.pushReplacementNamed(context, LoginScreen.route);
+      Navigator.pushReplacementNamed(context, HomeScreen.route);
       return value;
     });
     super.initState();
