@@ -1,9 +1,8 @@
 import pandas as pd
-import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, initialize_app
 
-cred = credentials.Certificate(r"firebase-admin-key.json")
-firebase_admin.initialize_app(cred)
+cred = credentials.Certificate(r"firebase-admin-key.json") # please find in bitwarden
+initialize_app(cred)
 
 db = firestore.client()
 COLLECTION_NAME = 'Transaction_A'
