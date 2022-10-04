@@ -33,6 +33,7 @@ class _EditTransactionState extends State<EditTransaction> {
     _atmCtrl.text = atm.toString();
     _noteCtrl.text = widget.transactionModel.note;
     _descriptionCtrl.text = widget.transactionModel.description;
+    dateTime = widget.transactionModel.timestamp.toDate();
     super.initState();
   }
 
