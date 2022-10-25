@@ -204,6 +204,8 @@ class _AddTransactionState extends State<AddTransaction> {
                               date: formatDate(dateTime),
                               description: _descriptionCtrl.text.trim(),
                               pin: false,
+                              searchIndex:
+                                  indexGenerator(_noteCtrl.text.trim()),
                             );
                             DatabaseManager.addTransaction(model)
                                 .then((value) => Navigator.pop(context));

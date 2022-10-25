@@ -9,6 +9,7 @@ class TransactionModel {
   String date;
   String description;
   bool pin;
+  List searchIndex;
 
   TransactionModel({
     required this.id,
@@ -19,6 +20,7 @@ class TransactionModel {
     required this.date,
     required this.description,
     required this.pin,
+    required this.searchIndex,
   });
 
   TransactionModel.fromDoc(DocumentSnapshot doc)
@@ -29,7 +31,8 @@ class TransactionModel {
         timestamp = doc['timestamp'] as Timestamp,
         date = doc['date'] as String,
         description = doc['description'] as String,
-        pin = doc['pin'] as bool;
+        pin = doc['pin'] as bool,
+        searchIndex = doc['search_index'] as List;
 
   Map<String, Object> toJson() => {
         'id': id,
@@ -40,5 +43,6 @@ class TransactionModel {
         'date': date,
         'description': description,
         'pin': pin,
+        'search_index': searchIndex,
       };
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mtracker/services/database_manager.dart';
 import 'package:mtracker/widget/balance.dart';
 import 'package:mtracker/widget/monthly_stats.dart';
+import 'package:mtracker/widget/search_btn.dart';
 import 'package:mtracker/widget/transaction_buttons.dart';
 import 'package:mtracker/widget/welcome.dart';
 
@@ -14,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = true;
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -31,6 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       );
+      setState(() {
+        isLoading = false;
+      });
     });
     super.initState();
   }
@@ -40,17 +46,23 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          children: const [
-            WelcomeWidget(),
-            SizedBox(height: 25),
-            BalanceWidget(),
-            SizedBox(height: 25),
-            TransactionButtonsWidget(),
-            SizedBox(height: 25),
-            MonthlyStatsWidget(),
-          ],
-        ),
+        child: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView(
+                children: const [
+                  WelcomeWidget(),
+                  SizedBox(height: 25),
+                  BalanceWidget(),
+                  SizedBox(height: 25),
+                  TransactionButtonsWidget(),
+                  SizedBox(height: 25),
+                  SearchBtn(),
+                  SizedBox(height: 25),
+                  MonthlyStatsWidget(),
+                ],
+              ),
       ),
     );
   }

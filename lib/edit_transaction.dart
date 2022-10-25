@@ -232,6 +232,8 @@ class _EditTransactionState extends State<EditTransaction> {
                               date: formatDate(dateTime),
                               description: _descriptionCtrl.text.trim(),
                               pin: widget.transactionModel.pin,
+                              searchIndex:
+                                  indexGenerator(_noteCtrl.text.trim()),
                             );
                             DatabaseManager.addTransaction(model)
                                 .then((value) => Navigator.pop(context));

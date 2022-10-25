@@ -5,6 +5,7 @@ import 'package:mtracker/edit_transaction.dart';
 import 'package:mtracker/home.dart';
 import 'package:mtracker/login.dart';
 import 'package:mtracker/model/transaction.dart';
+import 'package:mtracker/search_transation.dart';
 import 'package:mtracker/start.dart';
 
 class RouteGenerator {
@@ -30,6 +31,11 @@ class RouteGenerator {
       case AllTransaction.route:
         return MaterialPageRoute(
           builder: (context) => const AllTransaction(),
+          settings: settings,
+        );
+      case SearchTransaction.route:
+        return MaterialPageRoute(
+          builder: (context) => const SearchTransaction(),
           settings: settings,
         );
       case EditTransaction.route:

@@ -8,6 +8,11 @@ class DatabaseManager {
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
   static const String TRANSACTION_COLLECTION_NAME = 'Transaction_A';
 
+  static Stream<QuerySnapshot> searchTransaction(String key) => _db
+      .collection(TRANSACTION_COLLECTION_NAME)
+      .where("search_index", arrayContains: key)
+      .snapshots();
+
   static Stream<QuerySnapshot> getAllTransaction() => _db
       .collection(TRANSACTION_COLLECTION_NAME)
       .orderBy('pin', descending: true)

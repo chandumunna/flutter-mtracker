@@ -25,10 +25,11 @@ class MonthlyStatsWidget extends StatelessWidget {
           } else {
             final List<DocumentSnapshot<Object?>> allTransactions =
                 snapshot.data!.docs;
+
             final List<TransactionModel> allTransactionsModel = allTransactions
                 .map((e) => TransactionModel.fromDoc(e))
                 .toList();
-
+            print("allTransactionsModel $allTransactionsModel");
             final List<TransactionModel> currentMonthOutgoing =
                 outgoingTransactionOnMonth(allTransactionsModel);
             final num totalSum = getTotalSum(currentMonthOutgoing);

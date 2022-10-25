@@ -7,6 +7,7 @@ import 'package:mtracker/model/transaction.dart';
 import 'package:mtracker/services/database_manager.dart';
 import 'package:mtracker/widget/error.dart';
 import 'package:mtracker/widget/loading.dart';
+import 'package:mtracker/widget/transaction_list_widget.dart';
 
 class AllTransaction extends StatelessWidget {
   static const route = '/transactions';
@@ -32,7 +33,10 @@ class AllTransaction extends StatelessWidget {
                 if (allTransactions.isEmpty) {
                   return const ErrorDetailWidget('No Transaction Found');
                 }
-                return TransactionListWidget(allTransactions: allTransactions);
+                return TransactionListWidget(
+                  allTransactions: allTransactions,
+                  canPin: true,
+                );
               } else {
                 return const ErrorDetailWidget(
                   'Error while loading Transaction',
@@ -42,100 +46,6 @@ class AllTransaction extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-}
-
-class TransactionListWidget extends StatefulWidget {
-  const TransactionListWidget({
-    Key? key,
-    required this.allTransactions,
-  }) : super(key: key);
-
-  final List<DocumentSnapshot> allTransactions;
-
-  @override
-  State<TransactionListWidget> createState() => _TransactionLIstWidgetState();
-}
-
-class _TransactionLIstWidgetState extends State<TransactionListWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.allTransactions.length,
-      itemBuilder: (context, index) {
-        final TransactionModel transactionModel =
-            TransactionModel.fromDoc(widget.allTransactions[index]);
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Material(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.grey.shade200,
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  EditTransaction.route,
-                  arguments: transactionModel,
-                );
-              },
-              onLongPress: () {
-                DatabaseManager.togglePin(transactionModel);
-              },
-              child: ListTile(
-                isThreeLine: true,
-                leading: Icon(
-                  Icons.label_important,
-                  size: 30,
-                  color: transactionModel.pin ? Colors.amber : Colors.grey,
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    transactionModel.note,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                      ),
-                      child: Text(
-                        transactionModel.description,
-                        softWrap: true,
-                        overflow: TextOverflow.fade,
-                      ),
-                    ),
-                    Chip(
-                      label: Text(
-                        formatDate(
-                          transactionModel.timestamp.toDate(),
-                        ),
-                        softWrap: true,
-                        style: GoogleFonts.oswaldTextTheme().caption!.copyWith(
-                              fontSize: 12,
-                              color: Colors.black,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                trailing: Text(
-                  formatAtm(transactionModel.amount),
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: transactionModel.type == 'Incoming'
-                            ? Colors.green
-                            : Colors.red,
-                      ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
