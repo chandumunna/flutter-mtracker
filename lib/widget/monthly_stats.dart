@@ -29,7 +29,6 @@ class MonthlyStatsWidget extends StatelessWidget {
             final List<TransactionModel> allTransactionsModel = allTransactions
                 .map((e) => TransactionModel.fromDoc(e))
                 .toList();
-            print("allTransactionsModel $allTransactionsModel");
             final List<TransactionModel> currentMonthOutgoing =
                 outgoingTransactionOnMonth(allTransactionsModel);
             final num totalSum = getTotalSum(currentMonthOutgoing);

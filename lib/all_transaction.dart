@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mtracker/constant.dart';
-import 'package:mtracker/edit_transaction.dart';
-import 'package:mtracker/model/transaction.dart';
 import 'package:mtracker/services/database_manager.dart';
 import 'package:mtracker/widget/error.dart';
 import 'package:mtracker/widget/loading.dart';

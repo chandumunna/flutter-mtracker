@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mtracker/constant.dart';
-import 'package:mtracker/edit_transaction.dart';
-import 'package:mtracker/model/transaction.dart';
 import 'package:mtracker/services/database_manager.dart';
 import 'package:mtracker/widget/loading.dart';
 import 'package:mtracker/widget/transaction_list_widget.dart';
@@ -36,17 +32,16 @@ class _SearchTransactionState extends State<SearchTransaction> {
               StreamBuilder<QuerySnapshot>(
                 stream: DatabaseManager.searchTransaction(searchKey),
                 builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const LoadingWidget();
-                    default:
-                      final List<DocumentSnapshot<Object?>> allTransactions =
-                          snapshot.data!.docs;
-                      return TransactionListWidget(
-                        allTransactions: allTransactions,
-                        canPin: false,
-                      );
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const LoadingWidget();
                   }
+                  final List<DocumentSnapshot<Object?>> allTransactions =
+                      snapshot.data!.docs;
+
+                  return TransactionListWidget(
+                    allTransactions: allTransactions,
+                    canPin: false,
+                  );
                 },
               ),
             Align(

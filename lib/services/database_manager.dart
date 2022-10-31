@@ -11,6 +11,8 @@ class DatabaseManager {
   static Stream<QuerySnapshot> searchTransaction(String key) => _db
       .collection(TRANSACTION_COLLECTION_NAME)
       .where("search_index", arrayContains: key)
+      .orderBy('pin', descending: true)
+      .orderBy('timestamp', descending: true)
       .snapshots();
 
   static Stream<QuerySnapshot> getAllTransaction() => _db
